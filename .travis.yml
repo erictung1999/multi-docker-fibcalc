@@ -3,18 +3,18 @@ services:
     - docker
     
 before_install:
-    - docker build -t test/test -f ./client/Dockerfile.dev ./client
+    - docker build -t erictung1999/test -f ./client/Dockerfile.dev ./client
     
 script:
-    - docker run -e CI=true test/test npm test -- --coverage
+    - docker run -e CI=true erictung1999/test npm test -- --coverage
     
 after_success:
-    - docker build -t test/client ./client
-    - docker build -t test/nginx ./nginx
-    - docker build -t test/server ./server
+    - docker build -t erictung1999/client ./client
+    - docker build -t erictung1999/nginx ./nginx
+    - docker build -t erictung1999/server ./server
     - docker build -t test/worker ./worker
     - echo $DOCKER_PASSWORD | docker login --username $DOCKER_ID --password-stdin
-    - docker push test/client
-    - docker push test/nginx
-    - docker push test/server
-    - docker push test/worker
+    - docker push erictung1999/client
+    - docker push erictung1999/nginx
+    - docker push erictung1999/server
+    - docker push erictung1999/worker
